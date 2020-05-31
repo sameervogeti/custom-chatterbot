@@ -3,7 +3,11 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 app=Flask(__name__)
 
-sample_bot=ChatBot("Chatterbot",storage_adapter="chatterbot.storage.SQLStorageAdapter")
+sample_bot=ChatBot("Chatterbot",storage_adapter="chatterbot.storage.SQLStorageAdapter",logic_adapters=[
+        {
+            'import_path': 'cool_adapter.MyLogicAdapter'
+        }
+    ])
 trainer=ChatterBotCorpusTrainer(sample_bot)
 trainer.train("chatterbot.corpus.english")
 trainer.train("data/data.yml")
